@@ -60,7 +60,11 @@ class MovieSession(models.Model):
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(to="User", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to="User",
+        on_delete=models.CASCADE,
+        related_name="orders"
+    )
 
     class Meta:
         ordering = ["-created_at"]
@@ -90,7 +94,7 @@ class Ticket(models.Model):
                 "seat",
                 "movie_session",
                 name="unique_ticket"
-            )
+            ),
         ]
 
     def __str__(self) -> str:
